@@ -37,7 +37,6 @@ class Form {
     }
 
     #check(value) {
-        console.log(this.#regexp.test(value));
         if (!value) {
             this.#errorMessage =
                 this.#element.getAttribute("aria-errormessage");
@@ -48,7 +47,7 @@ class Form {
         } else {
             if (this.#isShow) {
                 this.#isShow = false;
-                const formErrorDOM = document.querySelector(
+                const formErrorDOM = this.#element.parentElement.querySelector(
                     ".form--notification"
                 );
                 this.#element.style.border = "thin solid rgba(0, 0, 0, 0.5)";
@@ -67,7 +66,9 @@ class Form {
 
             this.#isShow = true;
         } else {
-            const formErrorDOM = document.querySelector(".form--notification");
+            const formErrorDOM = this.#element.parentElement.querySelector(
+                ".form--notification"
+            );
             formErrorDOM.innerText = message;
         }
     }
